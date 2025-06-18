@@ -1,6 +1,4 @@
 import CarouselComp from "../components/CarouselComp";
-import products from "../data/mock_products";
-import vendors from "../data/mock_vendors";
 
 const categories = [
   "Farmer's Produce",
@@ -12,10 +10,9 @@ const categories = [
   "Specialty / Limited Edition",
 ];
 
-const Home = () => {
+const Home = ({ products, vendors }) => {
   return (
     <main className="home-container">
-      <form></form>
       {categories.map((category, idx) => {
         const filterdProducts = products.filter(
           (product) => product.category === category

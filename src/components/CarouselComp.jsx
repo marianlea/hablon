@@ -1,5 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ProductCard from "./ProductCard";
 
 const responsive = {
@@ -20,6 +21,18 @@ const responsive = {
   },
 };
 
+const CustomLeftArrow = ({ onClick }) => (
+  <button onClick={onClick} className="custom-arrow left">
+    <FaChevronLeft />
+  </button>
+);
+
+const CustomRightArrow = ({ onClick }) => (
+  <button onClick={onClick} className="custom-arrow right">
+    <FaChevronRight />
+  </button>
+);
+
 const CarouselComp = ({ filteredProducts, vendors }) => {
   return (
     <section>
@@ -27,6 +40,8 @@ const CarouselComp = ({ filteredProducts, vendors }) => {
         className="categories-carousel"
         responsive={responsive}
         infinite={true}
+        customLeftArrow={<CustomLeftArrow />}
+        customRightArrow={<CustomRightArrow />}
       >
         {filteredProducts.map((product, idx) => (
           <ProductCard product={product} vendors={vendors} key={idx} />
