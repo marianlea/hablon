@@ -8,8 +8,8 @@ import {
 } from "@ariakit/react";
 
 //pages
-import Home from "./pages/home";
-import SplashScreen from "./pages/splash_screen";
+import Home from "./pages/Home";
+import SplashScreen from "./pages/SplashScreen";
 
 // icons
 import { IoEllipsisVertical } from "react-icons/io5";
@@ -18,8 +18,10 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import hablonLogo from "./assets/images/hablon_shadow.png";
 
 // data
-import products from "./data/mock_products";
-import vendors from "./data/mock_vendors";
+import products from "./data/MockProducts";
+import vendors from "./data/MockVendors";
+import SearchResult from "./pages/searchResult";
+import Product from "./pages/Product";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
@@ -28,15 +30,23 @@ function App() {
     product.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const currentProduct = products[0];
+  const currentVendor = vendors.find((v) => v.id === currentProduct.vendor_id);
+  const vendorListings = currentVendor.product_listings
+    .map((listing) => products.find((product) => listing === product.id))
+    .filter(Boolean);
+
   return (
     <>
       <header className="header">
         <section className="logo-container">
-          <IoEllipsisVertical
-            className="ellipsis-menu"
-            size={50}
-            color="#e1873d"
-          />
+          <button className="ellipsis-container">
+            <IoEllipsisVertical
+              className="ellipsis-menu"
+              size={50}
+              color="#e1873d"
+            />
+          </button>
           <img className="header-logo" src={hablonLogo}></img>
         </section>
         <section className="search-box-container">
@@ -49,7 +59,7 @@ function App() {
             />
             {searchValue && (
               <ComboboxPopover className="search-popover">
-                {filteredProducts.map((product) => (
+                {filteredProducts.slice(0, 5).map((product) => (
                   <ComboboxItem key={product.id} value={product.name} />
                 ))}
               </ComboboxPopover>
@@ -58,7 +68,11 @@ function App() {
         </section>
       </header>
       <main className="main-container">
-        <Home products={products} vendors={vendors} />
+        <Product
+          product={currentProduct}
+          vendor={currentVendor}
+          vendorListings={vendorListings}
+        />
       </main>
     </>
   );
