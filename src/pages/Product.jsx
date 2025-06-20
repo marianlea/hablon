@@ -3,7 +3,9 @@ import {
   FaFacebook,
   FaFacebookMessenger,
 } from "react-icons/fa6";
+import { RiInstagramFill } from "react-icons/ri";
 import MiniProductCard from "../components/MiniProductCard";
+import CarouselComp from "../components/CarouselComp";
 
 const Product = ({ product, vendor, vendorListings }) => {
   return (
@@ -26,16 +28,19 @@ const Product = ({ product, vendor, vendorListings }) => {
           </div>
         </header>
         <section className="vendor-details-container">
-          <div
-            className="vendor-image-container"
-            alt={`${vendor.preferred_name}'s image`}
-            style={{ backgroundImage: `url(${vendor.img})` }}
-          ></div>
-          <div className="vendor-description-contact-details-container">
+          <header>
             <h4 className="vendor-title">{`About ${vendor.preferred_name}`}</h4>
+            <div
+              className="vendor-image-container"
+              alt={`${vendor.preferred_name}'s image`}
+              style={{ backgroundImage: `url(${vendor.img})` }}
+            ></div>
+          </header>
+          <div className="vendor-description-contact-details-container">
             <p className="vendor-description">{vendor.description}</p>
+            <button className="profile-button">{`View ${vendor.name}'s Profile`}</button>
             <div className="vendor-contact-details-container">
-              <h4 className=" vendor-title">Contact the grower</h4>
+              <h4 className=" vendor-title">{`Contact ${vendor.preferred_name}`}</h4>
               <div className="vendor-contact-details">
                 <button className="phone-icon">
                   <FaPhoneVolume size={25} color="#2b462e" />
@@ -46,6 +51,9 @@ const Product = ({ product, vendor, vendorListings }) => {
                 <button className="fb-icon">
                   <FaFacebook size={25} color="#2b462e" />
                 </button>
+                <button className="instagram-icon">
+                  <RiInstagramFill size={25} color="#2b462e" />
+                </button>
               </div>
             </div>
           </div>
@@ -53,13 +61,11 @@ const Product = ({ product, vendor, vendorListings }) => {
         {vendor.product_listings.length > 1 && (
           <footer className="more-products-container">
             <h4>{`More Products from ${vendor.preferred_name}'s Farm`}</h4>
-            {vendorListings.map((product) => {
-              return (
-                <div className="mini-product-card-container" key={product.id}>
-                  <MiniProductCard product={product} />
-                </div>
-              );
-            })}
+            <section className="mini-product-cards">
+              {vendorListings.map((product) => {
+                return <MiniProductCard key={product.id} product={product} />;
+              })}
+            </section>
           </footer>
         )}
       </article>

@@ -12,6 +12,7 @@ const products = [
     category: "Farmer's Produce",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 1,
   },
   {
@@ -26,6 +27,7 @@ const products = [
     category: "Farmer's Produce",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 2,
   },
   {
@@ -41,6 +43,7 @@ const products = [
     category: "Home & Living",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 3,
   },
   {
@@ -55,6 +58,7 @@ const products = [
     category: "Home & Living",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 4,
   },
   {
@@ -69,6 +73,7 @@ const products = [
     category: "Fabrics",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 5,
   },
   {
@@ -83,6 +88,7 @@ const products = [
     category: "Bags & Accessories",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 6,
   },
   {
@@ -97,6 +103,7 @@ const products = [
     category: "Specialty / Limited Edition",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 7,
   },
   {
@@ -108,6 +115,7 @@ const products = [
     category: "Gifts & Souvenirs",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 8,
   },
   {
@@ -122,6 +130,7 @@ const products = [
     category: "Farmer's Produce",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 1,
   },
   {
@@ -136,6 +145,7 @@ const products = [
     category: "Farmer's Produce",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 2,
   },
   {
@@ -150,6 +160,7 @@ const products = [
     category: "Farmer's Produce",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 1,
   },
   {
@@ -164,6 +175,7 @@ const products = [
     category: "Farmer's Produce",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 1,
   },
   {
@@ -178,6 +190,7 @@ const products = [
     category: "Specialty / Limited Edition",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 7,
   },
   {
@@ -192,6 +205,7 @@ const products = [
     category: "Specialty / Limited Edition",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 2,
   },
   {
@@ -206,6 +220,7 @@ const products = [
     category: "Bags & Accessories",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 6,
   },
   {
@@ -220,6 +235,7 @@ const products = [
     category: "Home & Living",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus laborum sit iste deleniti illo ipsum nulla odio, reiciendis expedita. Minima, possimus vero doloribus dolorum pariatur voluptate ipsam iusto dignissimos",
+    availability: "available",
     vendor_id: 4,
   },
 ];

@@ -28,6 +28,7 @@ const Home = ({ products, vendors }) => {
             <CarouselComp
               filteredProducts={filteredProducts}
               vendors={vendors}
+              card="productCard"
             />
           </section>
         );

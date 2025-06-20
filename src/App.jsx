@@ -22,6 +22,7 @@ import products from "./data/MockProducts";
 import vendors from "./data/MockVendors";
 import SearchResult from "./pages/searchResult";
 import Product from "./pages/Product";
+import Vendor from "./pages/Vendor";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
@@ -68,11 +69,7 @@ function App() {
         </section>
       </header>
       <main className="main-container">
-        <Product
-          product={currentProduct}
-          vendor={currentVendor}
-          vendorListings={vendorListings}
-        />
+        <Vendor currentVendor={currentVendor} vendorListings={vendorListings} />
       </main>
     </>
   );
