@@ -7,6 +7,7 @@ import { RiInstagramFill } from "react-icons/ri";
 import { FaLocationDot } from "react-icons/fa6";
 
 import MiniProductCard from "../components/MiniProductCard";
+import Menu from "../components/Menu";
 
 const Vendor = ({ currentVendor, vendorListings }) => {
   const vendorType =

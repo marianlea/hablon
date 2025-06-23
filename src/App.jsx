@@ -9,7 +9,9 @@ import {
 
 //pages
 import Home from "./pages/Home";
-import SplashScreen from "./pages/SplashScreen";
+
+// components
+import SplashScreen from "./components/SplashScreen";
 
 // icons
 import { IoEllipsisVertical } from "react-icons/io5";
@@ -23,9 +25,15 @@ import vendors from "./data/MockVendors";
 import SearchResult from "./pages/searchResult";
 import Product from "./pages/Product";
 import Vendor from "./pages/Vendor";
+import Menu from "./components/Menu";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsMenuVisible((prev) => !prev);
+  };
 
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -41,7 +49,7 @@ function App() {
     <>
       <header className="header">
         <section className="logo-container">
-          <button className="ellipsis-container">
+          <button className="ellipsis-container" onClick={handleMenuClick}>
             <IoEllipsisVertical
               className="ellipsis-menu"
               size={50}
@@ -50,6 +58,13 @@ function App() {
           </button>
           <img className="header-logo" src={hablonLogo}></img>
         </section>
+        {isMenuVisible ? (
+          <Menu
+            isMenuVisible={isMenuVisible}
+            handleMenuClick={handleMenuClick}
+          />
+        ) : null}
+
         <section className="search-box-container">
           <ComboboxProvider className="search-box">
             <Combobox
@@ -68,9 +83,7 @@ function App() {
           </ComboboxProvider>
         </section>
       </header>
-      <main className="main-container">
-        <Vendor currentVendor={currentVendor} vendorListings={vendorListings} />
-      </main>
+      <main className="main-container"></main>
     </>
   );
 }
