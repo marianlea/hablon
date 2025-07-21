@@ -1,8 +1,14 @@
 # Hablon
 
-Hi! I’m Lea, and Hablon is a personal passion project I’m building to support Filipino artisans, farmers, and small producers by giving them a platform to showcase and sell their handmade and locally sourced products directly to consumers.
+**Hablon** is a mobile-first product discovery platform designed to help local Filipino vendors, especially small-scale makers, farmers, and artisans, showcase their products online. Built with simplicity, speed, and accessibility in mind, Hablon is focused on connecting local producers directly with interested buyers.
+
+This is **not a marketplace**. Buyers do not purchase products in the app. Instead, they browse listings and contact vendors directly to arrange payments or meetups.
 
 ## 🎯 Why Hablon?
+
+In many communities across the Philippines, small producers rely on word-of-mouth or physical markets to sell their goods. Hablon aims to give them an accessible online presence, without requiring expensive setups or complex tools.
+
+The name _Hablon_ is inspired by traditional weaving, symbolizing connection, craftsmanship, and local roots.
 
 Many of the vendors I want to empower rely primarily on mobile phones and often have limited data connections. Because of this, I’m designing Hablon with a **mobile-first, low-bandwidth approach** to ensure the app is fast, accessible, and easy to use even in areas with unstable or slow internet.
 
@@ -10,18 +16,19 @@ My goal is to help these communities preserve traditional crafts, build sustaina
 
 ## 🛠️ Features (In Progress)
 
-- Vendor sign-up and onboarding with a simple, intuitive flow
-- Product listing management for vendors
-- Responsive, mobile-first design built with Tailwind CSS
-- Conditional product visibility — only vendors with listed products are searchable
-- Splash screen loader for smoother data fetching
-- Backend development using the MERN stack (MongoDB, Express, React, Node.js) underway
+- ✅ **Mobile-first design** — optimized for users on smartphones and limited data plans
+- 🪡 **Vendor profiles** — display your products, photos, contact info, and location
+- 🔍 **Product feed** — browse listings by category or tag
+- 💬 **No in-app payments** — buyers reach out directly to vendors
+- ⭐ **Favorites (buyer-side)** — signed-in users can save vendors they love
+- 🌱 **Low-bandwidth focus** — minimal dependencies, optimized image sizes, and efficient data fetching
 
 ## 🔧 Tech Stack
 
-- **Frontend:** React.js, Tailwind CSS
-- **Backend:** Node.js, Express.js (planned)
-- **Database:** MongoDB (planned)
+- **Frontend**: ReactJS, TailwindCSS / Material UI
+- **Backend (in progress)**: Node.js + Express + MongoDB (MERN stack)
+- **Authentication**: Coming soon (JWT-based for both vendors and buyers)
+- **Hosting**: TBD
 
 ## 🚀 Getting Started
 
