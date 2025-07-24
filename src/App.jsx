@@ -73,13 +73,12 @@ function App() {
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search products"
             />
-            {searchValue && (
+            {/* {searchValue && (
               <ComboboxPopover className="search-popover">
                 {filteredProducts.slice(0, 5).map((product) => (
                   <ComboboxItem key={product.id} value={product.name} />
                 ))}
-              </ComboboxPopover>
-            )}
+              </ComboboxPopover> */}
           </ComboboxProvider>
         </section>
       </header>
