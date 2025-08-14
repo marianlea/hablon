@@ -1,12 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useState } from "react";
-import {
-  Combobox,
-  ComboboxItem,
-  ComboboxPopover,
-  ComboboxProvider,
-} from "@ariakit/react";
 
 //pages
 import Home from "./pages/Home";
@@ -27,6 +21,7 @@ import hablonLogo from "./assets/images/hablon_shadow.png";
 // data
 import products from "./data/MockProducts";
 import vendors from "./data/MockVendors";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
@@ -45,6 +40,10 @@ function App() {
   const vendorListings = currentVendor.product_listings
     .map((listing) => products.find((product) => listing === product.id))
     .filter(Boolean);
+
+  const handleSearchValueChange = (e) => {
+    setSearchValue(e.target.value);
+  };
 
   return (
     <BrowserRouter>
@@ -65,23 +64,10 @@ function App() {
             handleMenuClick={handleMenuClick}
           />
         ) : null}
-
-        <section className="search-box-container">
-          <ComboboxProvider className="search-box">
-            <Combobox
-              className="search"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search products"
-            />
-            {/* {searchValue && (
-              <ComboboxPopover className="search-popover">
-              {filteredProducts.slice(0, 5).map((product) => (
-                <ComboboxItem key={product.id} value={product.name} />
-                ))}
-                </ComboboxPopover> */}
-          </ComboboxProvider>
-        </section>
+        <SearchBar
+          handleSearchValueChange={handleSearchValueChange}
+          searchValue={searchValue}
+        />
       </header>
       <main className="main-container">
         <Routes>
