@@ -1,4 +1,5 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { useState } from "react";
 import {
   Combobox,
@@ -9,9 +10,13 @@ import {
 
 //pages
 import Home from "./pages/Home";
+import SearchResults from "./pages/SearchResults";
+import Vendor from "./pages/Vendor";
+import Product from "./pages/Product";
 
 // components
 import SplashScreen from "./components/SplashScreen";
+import Menu from "./components/Menu";
 
 // icons
 import { IoEllipsisVertical } from "react-icons/io5";
@@ -22,10 +27,6 @@ import hablonLogo from "./assets/images/hablon_shadow.png";
 // data
 import products from "./data/MockProducts";
 import vendors from "./data/MockVendors";
-import SearchResult from "./pages/searchResult";
-import Product from "./pages/Product";
-import Vendor from "./pages/Vendor";
-import Menu from "./components/Menu";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
@@ -46,7 +47,7 @@ function App() {
     .filter(Boolean);
 
   return (
-    <>
+    <BrowserRouter>
       <header className="header">
         <section className="logo-container">
           <button className="ellipsis-container" onClick={handleMenuClick}>
@@ -75,15 +76,45 @@ function App() {
             />
             {/* {searchValue && (
               <ComboboxPopover className="search-popover">
-                {filteredProducts.slice(0, 5).map((product) => (
-                  <ComboboxItem key={product.id} value={product.name} />
+              {filteredProducts.slice(0, 5).map((product) => (
+                <ComboboxItem key={product.id} value={product.name} />
                 ))}
-              </ComboboxPopover> */}
+                </ComboboxPopover> */}
           </ComboboxProvider>
         </section>
       </header>
-      <main className="main-container"></main>
-    </>
+      <main className="main-container">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              searchValue ? (
+                <SearchResults
+                  vendors={vendors}
+                  filteredProducts={filteredProducts}
+                />
+              ) : (
+                <Home products={products} vendors={vendors} />
+              )
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <Product
+                products={products}
+                vendors={vendors}
+                vendorListings={vendorListings}
+              />
+            }
+          />
+          <Route
+            path="/vendor/:id"
+            element={<Vendor products={products} vendors={vendors} />}
+          />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 

@@ -1,13 +1,28 @@
+import { useParams } from "react-router";
+
+// icons
 import {
   FaPhoneVolume,
   FaFacebook,
   FaFacebookMessenger,
 } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
+
+// components
 import MiniProductCard from "../components/MiniProductCard";
 import CarouselComp from "../components/CarouselComp";
 
-const Product = ({ product, vendor, vendorListings }) => {
+const Product = ({ products, vendors, vendorListings }) => {
+  const { id } = useParams();
+
+  const product = products?.find((product) => product.id === Number(id));
+  if (!product) return <p>Product not found</p>;
+
+  const vendor = vendors?.find((vendor) => vendor.id === product.vendor_id);
+  if (!product) return <p>Vendor not found</p>;
+
+  console.log(vendor);
+
   return (
     <section className="product-page-container">
       <article className="product-page-product-card">
@@ -20,7 +35,7 @@ const Product = ({ product, vendor, vendorListings }) => {
             ></img>
           </figure>
           <div className="product-details-container">
-            <h4 className="product-name">{`${product.name} from ${vendor.preferred_name}'s Farm`}</h4>
+            <h4 className="product-name">{`${product.name} from ${vendor.nickname}'s Farm`}</h4>
             <div className="other-details-container">
               <h5>{vendor.address}</h5>
               <h5>{`Php${product.price}/${product.unit}`}</h5>
@@ -29,10 +44,10 @@ const Product = ({ product, vendor, vendorListings }) => {
         </header>
         <section className="vendor-details-container">
           <header>
-            <h4 className="vendor-title">{`About ${vendor.preferred_name}`}</h4>
+            <h4 className="vendor-title">{`About ${vendor.nickname}`}</h4>
             <div
               className="vendor-image-container"
-              alt={`${vendor.preferred_name}'s image`}
+              alt={`${vendor.nickname}'s image`}
               style={{ backgroundImage: `url(${vendor.img})` }}
             ></div>
           </header>
@@ -40,7 +55,7 @@ const Product = ({ product, vendor, vendorListings }) => {
             <p className="vendor-description">{vendor.description}</p>
             <button className="profile-button">{`View ${vendor.name}'s Profile`}</button>
             <div className="vendor-contact-details-container">
-              <h4 className=" vendor-title">{`Contact ${vendor.preferred_name}`}</h4>
+              <h4 className=" vendor-title">{`Contact ${vendor.nickname}`}</h4>
               <div className="vendor-contact-details">
                 <button className="phone-icon">
                   <FaPhoneVolume size={25} color="#2b462e" />
@@ -60,7 +75,7 @@ const Product = ({ product, vendor, vendorListings }) => {
         </section>
         {vendor.product_listings.length > 1 && (
           <footer className="more-products-container">
-            <h4>{`More Products from ${vendor.preferred_name}'s Farm`}</h4>
+            <h4>{`More Products from ${vendor.nickname}'s Farm`}</h4>
             <section className="mini-product-cards">
               {vendorListings.map((product) => {
                 return <MiniProductCard key={product.id} product={product} />;

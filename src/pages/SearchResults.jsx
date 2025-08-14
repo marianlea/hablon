@@ -1,6 +1,6 @@
 import ProductCard from "../components/ProductCard";
 
-const SearchResult = ({ filteredProducts, vendors }) => {
+const SearchResults = ({ filteredProducts, vendors }) => {
   return (
     <section className="search-result-container">
       {filteredProducts.map((product) => {
@@ -17,4 +17,4 @@ const SearchResult = ({ filteredProducts, vendors }) => {
   );
 };
 
-export default SearchResult;
+export default SearchResults;

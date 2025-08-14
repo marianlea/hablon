@@ -16,12 +16,10 @@ My goal is to help these communities preserve traditional crafts, build sustaina
 
 ## 🛠️ Features (In Progress)
 
-- ✅ **Mobile-first design** — optimized for users on smartphones and limited data plans
 - 🪡 **Vendor profiles** — display your products, photos, contact info, and location
 - 🔍 **Product feed** — browse listings by category or tag
 - 💬 **No in-app payments** — buyers reach out directly to vendors
 - ⭐ **Favorites (buyer-side)** — signed-in users can save vendors they love
-- 🌱 **Low-bandwidth focus** — minimal dependencies, optimized image sizes, and efficient data fetching
 
 ## 🔧 Tech Stack
 
@@ -29,6 +27,11 @@ My goal is to help these communities preserve traditional crafts, build sustaina
 - **Backend (in progress)**: Node.js + Express + MongoDB (MERN stack)
 - **Authentication**: Coming soon (JWT-based for both vendors and buyers)
 - **Hosting**: TBD
+
+## 🔮 Future Features
+
+- ✅ **Mobile-first design** — optimize the app for users on smartphones and limited data plans
+- 🌱 **Low-bandwidth focus** — minimal dependencies, optimized image sizes, and efficient data fetching
 
 ## 🚀 Getting Started
 
