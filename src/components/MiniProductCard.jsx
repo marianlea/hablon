@@ -5,7 +5,7 @@ import { MdOutlineFavorite } from "react-icons/md";
 
 const MiniProductCard = ({ product }) => {
   return (
-    <Link to={`/product/${product.id}`}>
+    <Link to={`/product/${product.id}`} className="mini-product-link">
       <article className="mini-product-card-container">
         <figure className="image-holder">
           <img src={product.img}></img>

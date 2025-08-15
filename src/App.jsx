@@ -35,11 +35,12 @@ function App() {
     product.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const currentProduct = products[0];
-  const currentVendor = vendors.find((v) => v.id === currentProduct.vendor_id);
-  const vendorListings = currentVendor.product_listings
-    .map((listing) => products.find((product) => listing === product.id))
-    .filter(Boolean);
+  // const currentProduct = products[0];
+  // const currentVendor = vendors.find((v) => v.id === currentProduct.vendor_id);
+
+  // const vendorListings = currentVendor.product_listings
+  //   .map((listing) => products.find((product) => listing === product.id))
+  //   .filter(Boolean);
 
   const handleSearchValueChange = (e) => {
     setSearchValue(e.target.value);
@@ -86,16 +87,10 @@ function App() {
           />
           <Route
             path="/product/:id"
-            element={
-              <Product
-                products={products}
-                vendors={vendors}
-                vendorListings={vendorListings}
-              />
-            }
+            element={<Product products={products} vendors={vendors} />}
           />
           <Route
-            path="/vendor/:id"
+            path="/vendor/:vendorId"
             element={<Vendor products={products} vendors={vendors} />}
           />
         </Routes>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 
 // icons
 import {
@@ -12,16 +12,18 @@ import { RiInstagramFill } from "react-icons/ri";
 import MiniProductCard from "../components/MiniProductCard";
 import CarouselComp from "../components/CarouselComp";
 
-const Product = ({ products, vendors, vendorListings }) => {
+const Product = ({ products, vendors }) => {
   const { id } = useParams();
 
   const product = products?.find((product) => product.id === Number(id));
   if (!product) return <p>Product not found</p>;
 
   const vendor = vendors?.find((vendor) => vendor.id === product.vendor_id);
-  if (!product) return <p>Vendor not found</p>;
+  if (!vendor) return <p>Vendor not found</p>;
 
-  console.log(vendor);
+  const vendorListings = vendor.product_listings
+    .map((listing) => products.find((product) => listing === product.id))
+    .filter(Boolean);
 
   return (
     <section className="product-page-container">
@@ -53,7 +55,9 @@ const Product = ({ products, vendors, vendorListings }) => {
           </header>
           <div className="vendor-description-contact-details-container">
             <p className="vendor-description">{vendor.description}</p>
-            <button className="profile-button">{`View ${vendor.name}'s Profile`}</button>
+            <Link to={`/vendor/${vendor.id}`}>
+              <button className="profile-button">{`View ${vendor.name}'s Profile`}</button>
+            </Link>
             <div className="vendor-contact-details-container">
               <h4 className=" vendor-title">{`Contact ${vendor.nickname}`}</h4>
               <div className="vendor-contact-details">

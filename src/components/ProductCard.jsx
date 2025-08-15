@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import { FaLocationDot } from "react-icons/fa6";
-import { MdFavoriteBorder } from "react-icons/md";
-import { MdOutlineFavorite } from "react-icons/md";
+import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 const ProductCard = ({ product, vendors }) => {
   const vendor = vendors.find((v) => v.id === product.vendor_id);

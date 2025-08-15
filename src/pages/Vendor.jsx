@@ -1,3 +1,6 @@
+import { useParams } from "react-router";
+
+// icons
 import {
   FaPhoneVolume,
   FaFacebook,
@@ -6,26 +9,35 @@ import {
 import { RiInstagramFill } from "react-icons/ri";
 import { FaLocationDot } from "react-icons/fa6";
 
+// components
 import MiniProductCard from "../components/MiniProductCard";
 import Menu from "../components/Menu";
 
-const Vendor = ({ currentVendor, vendorListings }) => {
-  const vendorType =
-    currentVendor.type.charAt(0).toUpperCase() + currentVendor.type.slice(1);
+const Vendor = ({ products, vendors }) => {
+  const { vendorId } = useParams();
+
+  const vendor = vendors?.find((vendor) => String(vendor.id) === vendorId);
+  if (!vendor) return <p>Vendor not found</p>;
+
+  const vendorType = vendor.type.charAt(0).toUpperCase() + vendor.type.slice(1);
+
+  const vendorListings = vendor.product_listings
+    .map((listing) => products.find((product) => listing === product.id))
+    .filter(Boolean);
 
   return (
     <article className="vendor-page-container">
       <figure className="vendor-img-container">
-        <img className="vendor-img" src={currentVendor.img}></img>
+        <img className="vendor-img" src={vendor.img}></img>
       </figure>
       <div className="vendor-details-container">
         <section className="vendor-details">
           <h4>{`About the ${vendorType}`}</h4>
-          <p>{currentVendor.description}</p>
+          <p>{vendor.description}</p>
         </section>
         <section className="vendor-contact-details">
           <div>
-            <h4>{`Contact ${currentVendor.preferred_name}`}</h4>
+            <h4>{`Contact ${vendor.nickname}`}</h4>
             <div className="contact-details-container">
               <button className="phone-icon">
                 <FaPhoneVolume size={25} color="#2b462e" />
