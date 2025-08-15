@@ -12,9 +12,6 @@ import Product from "./pages/Product";
 import SplashScreen from "./components/SplashScreen";
 import Menu from "./components/Menu";
 
-// contexts
-import { SearchProvider, useSearch } from "./context/SearchContext";
-
 // data
 import products from "./data/MockProducts";
 import vendors from "./data/MockVendors";
@@ -27,7 +24,6 @@ import hablonLogo from "./assets/images/hablon_shadow.png";
 import { IoEllipsisVertical } from "react-icons/io5";
 function App() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const searchValue = useSearch();
   const handleMenuClick = () => {
     setIsMenuVisible((prev) => !prev);
   };
@@ -88,13 +84,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              searchValue ? (
-                <SearchResults products={products} vendors={vendors} />
-              ) : (
-                <Home products={products} vendors={vendors} />
-              )
-            }
+            element={<Home products={products} vendors={vendors} />}
           />
 
           <Route

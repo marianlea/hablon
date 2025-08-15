@@ -1,12 +1,23 @@
 import { Link } from "react-router";
+
+// icons
 import { FaLocationDot } from "react-icons/fa6";
 import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+
+// context
+import { useSearch } from "../context/SearchContext";
 
 const ProductCard = ({ product, vendors }) => {
   const vendor = vendors.find((v) => v.id === product.vendor_id);
 
+  const { setSearchValue } = useSearch();
+
   return (
-    <Link to={`/product/${product.id}`} className="product-card-link">
+    <Link
+      to={`/product/${product.id}`}
+      onclick={() => setSearchValue("")}
+      className="product-card-link"
+    >
       <article className="product-card">
         <header className="image-container">
           <img className="product-image" src={product.img[0]}></img>

@@ -1,4 +1,5 @@
 import CarouselComp from "../components/CarouselComp";
+import SearchResults from "./SearchResults";
 
 const categories = [
   "Farmer's Produce",
@@ -10,7 +11,10 @@ const categories = [
   "Specialty / Limited Edition",
 ];
 
-const Home = ({ products, vendors }) => {
+const Home = ({ products, vendors, searchValue }) => {
+  if (searchValue) {
+    return <SearchResults products={products} vendors={vendors} />;
+  }
   return (
     <main className="home-container">
       {categories.map((category, idx) => {
