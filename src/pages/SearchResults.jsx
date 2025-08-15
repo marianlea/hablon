@@ -1,6 +1,13 @@
 import ProductCard from "../components/ProductCard";
+import { useSearch } from "../context/SearchContext";
 
-const SearchResults = ({ filteredProducts, vendors }) => {
+const SearchResults = ({ products, vendors }) => {
+  const { searchValue } = useSearch();
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <section className="search-result-container">
       {filteredProducts.map((product) => {

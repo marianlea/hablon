@@ -507,6 +507,12 @@
   margin-top: 1rem;
 }
 
+.menu-links {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .menu-container .vendor-links-container h6 {
   font-size: 0.8em;
 }

@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { Routes, Route } from "react-router";
 import { useState } from "react";
 
 //pages
@@ -12,42 +12,36 @@ import Product from "./pages/Product";
 import SplashScreen from "./components/SplashScreen";
 import Menu from "./components/Menu";
 
-// icons
-import { IoEllipsisVertical } from "react-icons/io5";
-
-// assets
-import hablonLogo from "./assets/images/hablon_shadow.png";
+// contexts
+import { SearchProvider, useSearch } from "./context/SearchContext";
 
 // data
 import products from "./data/MockProducts";
 import vendors from "./data/MockVendors";
 import SearchBar from "./components/SearchBar";
 
-function App() {
-  const [searchValue, setSearchValue] = useState("");
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
+// assets
+import hablonLogo from "./assets/images/hablon_shadow.png";
 
+// icons
+import { IoEllipsisVertical } from "react-icons/io5";
+function App() {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const searchValue = useSearch();
   const handleMenuClick = () => {
     setIsMenuVisible((prev) => !prev);
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  // const filteredProducts = products.filter((product) =>
+  //   product.name.toLowerCase().includes(searchValue.toLowerCase())
+  // );
 
-  // const currentProduct = products[0];
-  // const currentVendor = vendors.find((v) => v.id === currentProduct.vendor_id);
-
-  // const vendorListings = currentVendor.product_listings
-  //   .map((listing) => products.find((product) => listing === product.id))
-  //   .filter(Boolean);
-
-  const handleSearchValueChange = (e) => {
-    setSearchValue(e.target.value);
-  };
+  // const handleSearchValueChange = (e) => {
+  //   setSearchValue(e.target.value);
+  // };
 
   return (
-    <BrowserRouter>
+    <>
       <header className="header">
         <section className="logo-container">
           <button className="ellipsis-container" onClick={handleMenuClick}>
@@ -65,25 +59,47 @@ function App() {
             handleMenuClick={handleMenuClick}
           />
         ) : null}
-        <SearchBar
-          handleSearchValueChange={handleSearchValueChange}
-          searchValue={searchValue}
-        />
+        <SearchBar />
       </header>
       <main className="main-container">
+        {/* <Routes>
+          <Route
+            path="/"
+            element={
+              searchValue ? (
+                <SearchResults vendors={vendors} products={products} />
+              ) : (
+                <Home products={products} vendors={vendors} />
+              )
+            }
+          />
+          
+          <Route
+            path="/product/:id"
+            element={<Product products={products} vendors={vendors} />}
+          />
+          <Route
+            path="/vendor/:vendorId"
+            element={<Vendor products={products} vendors={vendors} />}
+          />
+        </Routes>
+         */}
+
         <Routes>
           <Route
             path="/"
             element={
               searchValue ? (
-                <SearchResults
-                  vendors={vendors}
-                  filteredProducts={filteredProducts}
-                />
+                <SearchResults products={products} vendors={vendors} />
               ) : (
                 <Home products={products} vendors={vendors} />
               )
             }
+          />
+
+          <Route
+            path="/search"
+            element={<SearchResults vendors={vendors} products={products} />}
           />
           <Route
             path="/product/:id"
@@ -95,7 +111,7 @@ function App() {
           />
         </Routes>
       </main>
-    </BrowserRouter>
+    </>
   );
 }
 

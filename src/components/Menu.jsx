@@ -1,3 +1,6 @@
+import { Link } from "react-router";
+import { useEffect } from "react";
+
 // icons
 import { IoCloseOutline } from "react-icons/io5";
 import { FaLinkedin, FaFacebookF } from "react-icons/fa";
@@ -8,7 +11,17 @@ import hablonLogo from "../assets/images/hablon_shadow.png";
 
 const mainLinks = ["home", "about", "contact"];
 
-const Menu = ({ handleMenuClick }) => {
+const Menu = ({ isMenuVisible, handleMenuClick }) => {
+  useEffect(() => {
+    isMenuVisible
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "auto");
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuVisible]);
+
   return (
     <section className="menu-container">
       <header>
@@ -22,7 +35,11 @@ const Menu = ({ handleMenuClick }) => {
       <section className="links-container">
         <ul className="main-links-container">
           {mainLinks.map((link, idx) => (
-            <li key={idx}>{link.toUpperCase()}</li>
+            <li key={idx} onClick={handleMenuClick}>
+              <Link to="/" className="menu-links">
+                {link.toUpperCase()}{" "}
+              </Link>
+            </li>
           ))}
         </ul>
         <ul className="vendor-links-container">

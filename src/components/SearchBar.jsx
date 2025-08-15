@@ -1,4 +1,6 @@
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
+import { useSearch } from "../context/SearchContext";
+
 import {
   Combobox,
   ComboboxItem,
@@ -6,14 +8,15 @@ import {
   ComboboxProvider,
 } from "@ariakit/react";
 
-const SearchBar = ({ searchValue, handleSearchValueChange }) => {
+const SearchBar = () => {
+  const { searchValue, handleSearchValueChange } = useSearch();
   return (
     <section className="search-box-container">
       <ComboboxProvider className="search-box">
         <Combobox
           className="search"
           value={searchValue}
-          onChange={handleSearchValueChange}
+          onChange={(e) => handleSearchValueChange(e.target.value)}
           placeholder="Search products"
         />
         {/* {searchValue && (
