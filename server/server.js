@@ -1,0 +1,29 @@
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import connectDB from "./db/connect.js";
+import productRoutes from "./routes/products_router.js";
+import vendorRoutes from "./routes/vendors_router.js";
+import userRoutes from "./routes/users_router.js";
+
+dotenv.config();
+connectDB();
+
+const PORT = process.env.PORT || 5000;
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.use(express.static("client"));
+
+// Routes
+app.use("/products", productRoutes);
+app.use("/vendors", vendorRoutes);
+app.use("/users", userRoutes);
+
+// Test route
+app.get("/", (req, res) => {
+  res.send("Yo it's running");
+});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

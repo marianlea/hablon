@@ -18,7 +18,7 @@ const vendorSchema = new mongoose.Schema(
     nickname: { type: String },
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
-    pssword_digest: { type: String, required: true, minlength: 8 },
+    password_digest: { type: String, required: true, minlength: 8 },
     address: String,
     type: {
       type: String,
