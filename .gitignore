@@ -23,4 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-src/playground.js
+.env
+.env.local
+.env.*.local
+
+*.log
+logs/
