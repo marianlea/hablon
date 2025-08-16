@@ -21,7 +21,6 @@ const Home = ({ products, vendors, searchValue }) => {
         const filteredProducts = products.filter(
           (product) => product.category === category
         );
-
         return (
           <section key={idx}>
             {filteredProducts.length > 0 ? (

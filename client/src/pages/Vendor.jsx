@@ -11,19 +11,31 @@ import { FaLocationDot } from "react-icons/fa6";
 
 // components
 import MiniProductCard from "../components/MiniProductCard";
-import Menu from "../components/Menu";
 
-const Vendor = ({ products, vendors }) => {
-  const { vendorId } = useParams();
+// api
+import { fetchVendorWithProducts } from "../utils/hablon_api";
+import { useEffect, useState } from "react";
 
-  const vendor = vendors?.find((vendor) => String(vendor.id) === vendorId);
+// data
+const fetchVendorData = async (setVendor, id) => {
+  try {
+    const data = await fetchVendorWithProducts(id);
+    setVendor(data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const Vendor = () => {
+  const { id } = useParams();
+  const [vendor, setVendor] = useState(null);
+
+  useEffect(() => {
+    fetchVendorData(setVendor, id);
+  }, [id]);
   if (!vendor) return <p>Vendor not found</p>;
 
-  const vendorType = vendor.type.charAt(0).toUpperCase() + vendor.type.slice(1);
-
-  const vendorListings = vendor.product_listings
-    .map((listing) => products.find((product) => listing === product.id))
-    .filter(Boolean);
+  const vendorListings = vendor.product_listings;
 
   return (
     <article className="vendor-page-container">
@@ -32,7 +44,7 @@ const Vendor = ({ products, vendors }) => {
       </figure>
       <div className="vendor-details-container">
         <section className="vendor-details">
-          <h4>{`About the ${vendorType}`}</h4>
+          <h4>{`About the ${vendor.type}`}</h4>
           <p>{vendor.description}</p>
         </section>
         <section className="vendor-contact-details">

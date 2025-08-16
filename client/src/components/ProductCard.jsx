@@ -7,15 +7,13 @@ import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 // context
 import { useSearch } from "../context/SearchContext";
 
-const ProductCard = ({ product, vendors }) => {
-  const vendor = vendors.find((v) => v.id === product.vendor_id);
-
+const ProductCard = ({ product }) => {
   const { setSearchValue } = useSearch();
 
   return (
     <Link
-      to={`/product/${product.id}`}
-      onclick={() => setSearchValue("")}
+      to={`/products/${product._id}/page`}
+      onClick={() => setSearchValue("")}
       className="product-card-link"
     >
       <article className="product-card">
@@ -30,7 +28,7 @@ const ProductCard = ({ product, vendors }) => {
           <div
             className="vendor-round-container"
             style={{
-              backgroundImage: `url(${vendor.img})`,
+              backgroundImage: `url(${product.vendor_id.img})`,
             }}
           ></div>
         </header>
@@ -40,7 +38,7 @@ const ProductCard = ({ product, vendors }) => {
         </section>
         <footer className="product-location-footer">
           <FaLocationDot className="location-dot" color="#a67747" size={15} />
-          <p className="product-address">{vendor.address}</p>
+          <p className="product-address">{product.vendor_id.address}</p>
         </footer>
       </article>
     </Link>

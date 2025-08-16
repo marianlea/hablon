@@ -1,0 +1,73 @@
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const fetchAllVendors = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vendors`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchVendorWithProducts = async (id) => {
+  try {
+    const res = await axios.get(`${API_URL}/vendors/${id}/products`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchAllProducts = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/products`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchProductWithVendor = async (id) => {
+  try {
+    const res = await axios.get(`${API_URL}/products/${id}`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchProductWithVendorAndListings = async (id) => {
+  try {
+    const res = await axios.get(`${API_URL}/products/${id}/page`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchAllUsers = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/users`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchUserWithFaveProducts = async (id) => {
+  try {
+    const res = await axios.get(`${API_URL}/users/${id}/products`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

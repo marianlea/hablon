@@ -9,12 +9,12 @@ import userRoutes from "./routes/users_router.js";
 dotenv.config();
 connectDB();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9900;
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static("client"));
+// app.use(express.static("client"));
 
 // Routes
 app.use("/products", productRoutes);

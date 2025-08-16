@@ -5,9 +5,13 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
 import { SearchProvider } from "./context/SearchContext.jsx";
 
+// helpers
+import ScrollToTop from "../src/helpers/ScrollToTop.jsx";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <SearchProvider>
         <App />
       </SearchProvider>

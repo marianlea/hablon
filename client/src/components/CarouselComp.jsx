@@ -42,12 +42,8 @@ const CarouselComp = ({ filteredProducts, vendors }) => {
         responsive={responsive}
         infinite={true}
       >
-        {filteredProducts.map((product, idx) => (
-          <ProductCard
-            product={product}
-            vendors={vendors}
-            key={idx}
-          ></ProductCard>
+        {filteredProducts.map((product) => (
+          <ProductCard product={product} vendors={vendors} key={product._id} />
         ))}
       </Carousel>
     </section>

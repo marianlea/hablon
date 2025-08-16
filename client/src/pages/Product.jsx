@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router";
+import { useEffect, useState } from "react";
 
 // icons
 import {
@@ -10,20 +11,31 @@ import { RiInstagramFill } from "react-icons/ri";
 
 // components
 import MiniProductCard from "../components/MiniProductCard";
-import CarouselComp from "../components/CarouselComp";
 
-const Product = ({ products, vendors }) => {
+// api
+import { fetchProductWithVendorAndListings } from "../utils/hablon_api";
+
+// data
+const fetchProductPageData = async (setProduct, id) => {
+  try {
+    const data = await fetchProductWithVendorAndListings(id);
+    setProduct(data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const Product = () => {
   const { id } = useParams();
+  const [product, setProduct] = useState(null);
 
-  const product = products?.find((product) => product.id === Number(id));
+  useEffect(() => {
+    fetchProductPageData(setProduct, id);
+  }, [id]);
+
   if (!product) return <p>Product not found</p>;
-
-  const vendor = vendors?.find((vendor) => vendor.id === product.vendor_id);
-  if (!vendor) return <p>Vendor not found</p>;
-
-  const vendorListings = vendor.product_listings
-    .map((listing) => products.find((product) => listing === product.id))
-    .filter(Boolean);
+  const vendor = product.vendor_id;
+  const vendorListings = vendor.product_listings;
 
   return (
     <section className="product-page-container">
@@ -55,8 +67,8 @@ const Product = ({ products, vendors }) => {
           </header>
           <div className="vendor-description-contact-details-container">
             <p className="vendor-description">{vendor.description}</p>
-            <Link to={`/vendor/${vendor.id}`}>
-              <button className="profile-button">{`View ${vendor.name}'s Profile`}</button>
+            <Link to={`/vendors/${vendor._id}/products`}>
+              <button className="profile-button">{`View ${vendor.nickname}'s Profile`}</button>
             </Link>
             <div className="vendor-contact-details-container">
               <h4 className=" vendor-title">{`Contact ${vendor.nickname}`}</h4>
@@ -82,7 +94,7 @@ const Product = ({ products, vendors }) => {
             <h4>{`More Products from ${vendor.nickname}'s Farm`}</h4>
             <section className="mini-product-cards">
               {vendorListings.map((product) => {
-                return <MiniProductCard key={product.id} product={product} />;
+                return <MiniProductCard key={product._id} product={product} />;
               })}
             </section>
           </footer>
