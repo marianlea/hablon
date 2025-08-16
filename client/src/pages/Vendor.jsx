@@ -44,6 +44,7 @@ const Vendor = () => {
       </figure>
       <div className="vendor-details-container">
         <section className="vendor-details">
+          <h4>{`${vendor.firstName} ${vendor.lastName} | ${vendor.type}`}</h4>
           <h4>{`About the ${vendor.type}`}</h4>
           <p>{vendor.description}</p>
         </section>
@@ -71,18 +72,23 @@ const Vendor = () => {
               <span>
                 <FaLocationDot size={18} color="#a67747" />
               </span>
-              Ilocos Region
+              {vendor.address}
             </button>
           </div>
         </section>
-        <footer className="more-products-container">
-          <h4>Our Products</h4>
-          <div className="mini-product-cards">
-            {vendorListings.map((product) => {
-              return <MiniProductCard key={product.id} product={product} />;
-            })}
-          </div>
-        </footer>
+
+        {vendorListings.length === 0 ? (
+          <h4>No listings yet</h4>
+        ) : (
+          <footer className="more-products-container">
+            <h4>Our Products</h4>
+            <div className="mini-product-cards">
+              {vendorListings.map((product) => {
+                return <MiniProductCard key={product._id} product={product} />;
+              })}
+            </div>
+          </footer>
+        )}
       </div>
     </article>
   );

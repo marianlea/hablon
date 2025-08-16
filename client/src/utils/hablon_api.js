@@ -2,6 +2,20 @@ import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+// vendors
+export const signupVendor = async (vendorData) => {
+  try {
+    const res = await axios.post(`${API_URL}/vendors/signup`, vendorData);
+    return res.data;
+  } catch (err) {
+    if (err.response) {
+      throw err.response.data;
+    } else {
+      throw err;
+    }
+  }
+};
+
 export const fetchAllVendors = async () => {
   try {
     const res = await axios.get(`${API_URL}/vendors`);
@@ -22,6 +36,7 @@ export const fetchVendorWithProducts = async (id) => {
   }
 };
 
+// products
 export const fetchAllProducts = async () => {
   try {
     const res = await axios.get(`${API_URL}/products`);
@@ -52,6 +67,7 @@ export const fetchProductWithVendorAndListings = async (id) => {
   }
 };
 
+// users
 export const fetchAllUsers = async () => {
   try {
     const res = await axios.get(`${API_URL}/users`);

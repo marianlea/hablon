@@ -6,9 +6,11 @@ const contactDetailsSchema = new Schema({
   phone_number: {
     type: String,
     required: true,
+    match: [/^\d{11}$/, "Phone number must be exactly 11 digits"],
   },
   messenger: String,
   facebook: String,
+  instagram: String,
 });
 
 const vendorSchema = new mongoose.Schema(
@@ -16,13 +18,17 @@ const vendorSchema = new mongoose.Schema(
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true },
     nickname: { type: String },
-    username: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    password_digest: { type: String, required: true, minlength: 8 },
-    address: String,
+    username: { type: String, required: true, unique: true, minlength: 8 },
+    email: { type: String, required: true, unique: true, match: /.+@.+\..+/ },
+    password_digest: {
+      type: String,
+      required: true,
+      match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+    },
+    address: { type: String, required: true },
     type: {
       type: String,
-      enum: ["farmer", "weaver", "artisan", "artist", "food artisan"],
+      enum: ["Farmer", "Weaver", "Artisan", "Artist", "Food artisan"],
       required: true,
     },
     img: String,

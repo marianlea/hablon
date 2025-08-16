@@ -17,8 +17,8 @@ app.use(express.json());
 // app.use(express.static("client"));
 
 // Routes
-app.use("/products", productRoutes);
 app.use("/vendors", vendorRoutes);
+app.use("/products", productRoutes);
 app.use("/users", userRoutes);
 
 // Test route

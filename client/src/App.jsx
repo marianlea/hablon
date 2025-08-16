@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import Vendor from "./pages/Vendor";
 import Product from "./pages/Product";
+import VendorSignUp from "./pages/VendorSignUp";
 
 // components
 import SplashScreen from "./components/SplashScreen";
@@ -14,17 +15,14 @@ import Menu from "./components/Menu";
 import SearchBar from "./components/SearchBar";
 
 // api
-import {
-  fetchAllVendors,
-  fetchAllProducts,
-  fetchAllUsers,
-} from "./utils/hablon_api";
+import { fetchAllVendors, fetchAllProducts } from "./utils/hablon_api";
 
 // assets
 import hablonLogo from "./assets/images/hablon_shadow.png";
 
 // icons
 import { IoEllipsisVertical } from "react-icons/io5";
+import VendorSignUpForm from "./components/VendorSignUpForm";
 
 const fetchVendors = async (setVendors) => {
   try {
@@ -101,6 +99,7 @@ function App() {
             path="/vendors/:id/products"
             element={<Vendor products={products} vendors={vendors} />}
           />
+          <Route path="/vendors/signup" element={<VendorSignUp />} />
         </Routes>
       </main>
     </>
