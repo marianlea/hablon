@@ -8,6 +8,7 @@ import SearchResults from "./pages/SearchResults";
 import Vendor from "./pages/Vendor";
 import Product from "./pages/Product";
 import VendorSignUp from "./pages/VendorSignUp";
+import Login from "./pages/Login";
 
 // components
 import SplashScreen from "./components/SplashScreen";
@@ -17,13 +18,16 @@ import SearchBar from "./components/SearchBar";
 // api
 import { fetchAllVendors, fetchAllProducts } from "./utils/hablon_api";
 
+// contexts
+import { useMenu } from "./context/MenuVisibilityContext";
+
 // assets
 import hablonLogo from "./assets/images/hablon_shadow.png";
 
 // icons
 import { IoEllipsisVertical } from "react-icons/io5";
-import VendorSignUpForm from "./components/VendorSignUpForm";
 
+// data
 const fetchVendors = async (setVendors) => {
   try {
     const data = await fetchAllVendors();
@@ -43,9 +47,9 @@ const fetchProducts = async (setProducts) => {
 };
 
 function App() {
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [vendors, setVendors] = useState([]);
   const [products, setProducts] = useState([]);
+  const { isMenuVisible, setIsMenuVisible } = useMenu();
 
   useEffect(() => {
     fetchVendors(setVendors);
@@ -55,15 +59,14 @@ function App() {
     fetchProducts(setProducts);
   }, []);
 
-  const handleMenuClick = () => {
-    setIsMenuVisible((prev) => !prev);
-  };
-
   return (
     <>
       <header className="header">
         <section className="logo-container">
-          <button className="ellipsis-container" onClick={handleMenuClick}>
+          <button
+            className="ellipsis-container"
+            onClick={() => setIsMenuVisible((prev) => !prev)}
+          >
             <IoEllipsisVertical
               className="ellipsis-menu"
               size={50}
@@ -72,21 +75,17 @@ function App() {
           </button>
           <img className="header-logo" src={hablonLogo}></img>
         </section>
-        {isMenuVisible ? (
-          <Menu
-            isMenuVisible={isMenuVisible}
-            handleMenuClick={handleMenuClick}
-          />
-        ) : null}
+        {isMenuVisible ? <Menu /> : null}
         <SearchBar />
       </header>
       <main className="main-container">
         <Routes>
+          <Route path="/vendors/signup" element={<VendorSignUp />} />
+          <Route path="/login" element={<Login />} />
           <Route
             path="/"
             element={<Home products={products} vendors={vendors} />}
           />
-
           <Route
             path="/search"
             element={<SearchResults vendors={vendors} products={products} />}
@@ -99,7 +98,6 @@ function App() {
             path="/vendors/:id/products"
             element={<Vendor products={products} vendors={vendors} />}
           />
-          <Route path="/vendors/signup" element={<VendorSignUp />} />
         </Routes>
       </main>
     </>

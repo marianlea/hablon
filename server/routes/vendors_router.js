@@ -6,8 +6,6 @@ const router = express.Router();
 
 // POST new vendor
 router.post("/signup", async (req, res) => {
-  console.log(req.body);
-
   try {
     const {
       firstName,
@@ -34,6 +32,7 @@ router.post("/signup", async (req, res) => {
     const existingUser = await Vendor.findOne({
       $or: [{ email }, { username }],
     });
+
     if (existingUser) {
       return res.status(400).json({ error: "Email or username already taken" });
     }
@@ -64,7 +63,6 @@ router.post("/signup", async (req, res) => {
     });
 
     const savedNewVendor = await newVendor.save();
-    console.log(savedNewVendor);
 
     return res.status(201).json(savedNewVendor);
   } catch (err) {

@@ -1,6 +1,7 @@
 import { FormError } from "@ariakit/react";
 import { signupVendor } from "../utils/hablon_api";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 // importing default
 import {
@@ -43,26 +44,33 @@ export const VendorSignUp = () => {
     const confirm = form.getValue($.confirmPassword);
 
     if (password !== confirm) {
-      form.setError(form.names.confirmPassword, "Passwords do not match!");
+      form.setError($.confirmPassword, "Passwords do not match!");
       return false; // prevent submission
     }
 
     if (!form.getValue($.email)) {
-      form.setError(form.names.email, "Email is required!");
+      form.setError($.email, "Email is required!");
+      return false;
     }
 
     try {
       const values = form.getState().values;
-      console.log({ values });
-
       const vendor = await signupVendor(values);
 
+      toast.success("Sign up successful!");
       navigate(`/vendors/${vendor._id}/products`);
-      console.log("new vendor successfully signed up", vendor);
+      return true;
     } catch (err) {
+      if (err.error === "Email or username already taken") {
+        form.setError($.email, "Email or username already taken");
+        form.setError($.username, "Email or username already taken");
+      }
+
+      toast.error(err.error || "Sign up failed.");
       console.error(err);
+      return false;
     }
-  });
+  }, false);
 
   return (
     <Form store={form}>
@@ -168,7 +176,7 @@ export const VendorSignUp = () => {
       </FormField>
 
       <div className="buttons">
-        <FormSubmit>Submit</FormSubmit>
+        <FormSubmit>Sign Up</FormSubmit>
       </div>
     </Form>
   );

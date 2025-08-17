@@ -1,5 +1,8 @@
 import { Link } from "react-router";
-import { useEffect } from "react";
+
+// contexts
+import { useCurrentUser } from "../context/CurrentUserContext";
+import { useMenu } from "../context/MenuVisibilityContext";
 
 // icons
 import { IoCloseOutline } from "react-icons/io5";
@@ -8,24 +11,21 @@ import { LuInstagram } from "react-icons/lu";
 
 // images
 import hablonLogo from "../assets/images/hablon_shadow.png";
+import LogoutButton from "./Logout";
 
 const mainLinks = ["home", "about", "contact"];
 
-const Menu = ({ isMenuVisible, handleMenuClick }) => {
-  useEffect(() => {
-    isMenuVisible
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "auto");
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isMenuVisible]);
+const Menu = () => {
+  const { currentUser } = useCurrentUser();
+  const { setIsMenuVisible } = useMenu();
 
   return (
     <section className="menu-container">
       <header>
-        <button className="close-menu-button" onClick={handleMenuClick}>
+        <button
+          className="close-menu-button"
+          onClick={() => setIsMenuVisible((prev) => !prev)}
+        >
           <IoCloseOutline size={50} color="#e1873d" />
         </button>
         <figure>
@@ -35,7 +35,7 @@ const Menu = ({ isMenuVisible, handleMenuClick }) => {
       <section className="links-container">
         <ul className="main-links-container">
           {mainLinks.map((link, idx) => (
-            <li key={idx} onClick={handleMenuClick}>
+            <li key={idx} onClick={() => setIsMenuVisible((prev) => !prev)}>
               <Link to="/" className="menu-links">
                 {link.toUpperCase()}{" "}
               </Link>
@@ -44,8 +44,20 @@ const Menu = ({ isMenuVisible, handleMenuClick }) => {
         </ul>
         <ul className="vendor-links-container">
           <h6>For Vendors</h6>
-          <li>Vendor Sign Up</li>
-          <li>Vendor Log In</li>
+          <Link
+            to="/vendors/signup"
+            onClick={() => setIsMenuVisible((prev) => !prev)}
+          >
+            <li>Vendor Sign Up</li>
+          </Link>
+          <Link to="/login" onClick={() => setIsMenuVisible((prev) => !prev)}>
+            <li>Vendor Log In</li>
+          </Link>
+          {currentUser && (
+            <li>
+              <LogoutButton />
+            </li>
+          )}
         </ul>
       </section>
       <footer className="hablon-socials">

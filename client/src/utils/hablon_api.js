@@ -1,6 +1,22 @@
 import axios from "axios";
 
+// api
 const API_URL = import.meta.env.VITE_API_URL;
+
+// authorisation
+export const login = async (userData) => {
+  try {
+    const res = await axios.post(`${API_URL}/login`, userData);
+    return res.data;
+  } catch (err) {
+    if (err.response) {
+      console.error(err);
+      throw err.response.data;
+    } else {
+      throw { error: "Network error occured." };
+    }
+  }
+};
 
 // vendors
 export const signupVendor = async (vendorData) => {
