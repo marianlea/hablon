@@ -9,11 +9,14 @@ import Vendor from "./pages/Vendor";
 import Product from "./pages/Product";
 import VendorSignUp from "./pages/VendorSignUp";
 import Login from "./pages/Login";
+import ProductForm from "./pages/ProductForm";
 
 // components
 import SplashScreen from "./components/SplashScreen";
 import Menu from "./components/Menu";
 import SearchBar from "./components/SearchBar";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ProductFormWrapper from "./components/ProductFormWrapper";
 
 // api
 import { fetchAllVendors, fetchAllProducts } from "./utils/hablon_api";
@@ -98,6 +101,13 @@ function App() {
             path="/vendors/:id/products"
             element={<Vendor products={products} vendors={vendors} />}
           />
+          <Route element={<ProtectedRoute />}>
+            <Route
+              path="/products/new"
+              element={<ProductForm mode="create" />}
+            />
+            <Route path="/products/:id/edit" element={<ProductFormWrapper />} />
+          </Route>
         </Routes>
       </main>
     </>

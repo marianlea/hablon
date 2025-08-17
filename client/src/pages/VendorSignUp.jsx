@@ -10,10 +10,10 @@ import {
   FormInput,
   FormSelect,
   FormSubmit,
-} from "../components/VendorSignUpForm";
+} from "../components/Form";
 
 // importing named export
-import { useFormStore } from "../components/VendorSignUpForm";
+import { useFormStore } from "../components/Form";
 import { SelectItem } from "../components/Select";
 
 export const VendorSignUp = () => {

@@ -1,5 +1,7 @@
 import { useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
+import { useCurrentUser } from "../context/CurrentUserContext";
+import isTokenValid from "../helpers/isTokenValid";
 
 // icons
 import {
@@ -28,10 +30,23 @@ const fetchProductPageData = async (setProduct, id) => {
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { currentUser } = useCurrentUser();
 
   useEffect(() => {
     fetchProductPageData(setProduct, id);
   }, [id]);
+
+  const canEditProduct = () => {
+    const token = localStorage.getItem("token");
+    if (!token || !currentUser) return false;
+
+    // Check if token is valid
+    const validToken = isTokenValid(token);
+    if (!validToken) return false;
+
+    // Check if current user is the vendor of this product
+    return product?.vendor_id?._id === currentUser._id;
+  };
 
   if (!product) return <p>Product not found</p>;
   const vendor = product.vendor_id;
@@ -49,13 +64,21 @@ const Product = () => {
             ></img>
           </figure>
           <div className="product-details-container">
-            <h4 className="product-name">{`${product.name} from ${vendor.nickname}'s Farm`}</h4>
+            <h4 className="product-name">{`${product.name} from ${vendor.nickname}'s shop`}</h4>
             <div className="other-details-container">
               <h5>{vendor.address}</h5>
               <h5>{`Php${product.price}/${product.unit}`}</h5>
             </div>
           </div>
         </header>
+        <p>{product.availability}</p>
+        <p className="product-description">{product.description}</p>
+        {canEditProduct() && (
+          <Link to={`/products/${product._id}/edit`}>
+            <button>Edit Product</button>
+          </Link>
+        )}
+
         <section className="vendor-details-container">
           <header>
             <h4 className="vendor-title">{`About ${vendor.nickname}`}</h4>

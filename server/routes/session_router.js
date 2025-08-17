@@ -2,7 +2,10 @@ import express from "express";
 import Vendor from "../models/vendor.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
+dotenv.config();
+const SECRET = process.env.JWT_SECRET;
 const router = express.Router();
 
 // POST login
@@ -28,7 +31,7 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { id: existingUser._id, email: existingUser.email },
-      "shirtBySzaOnASundayMorningInAugust",
+      SECRET,
       { expiresIn: "48h" }
     );
 

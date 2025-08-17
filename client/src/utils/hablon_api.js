@@ -53,6 +53,27 @@ export const fetchVendorWithProducts = async (id) => {
 };
 
 // products
+export const productCreate = async (productData) => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.post(`${API_URL}/products/new`, productData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res.data);
+
+    return res.data;
+  } catch (err) {
+    if (err.response) {
+      throw err.response.data;
+    } else {
+      throw err;
+    }
+  }
+};
+
 export const fetchAllProducts = async () => {
   try {
     const res = await axios.get(`${API_URL}/products`);
@@ -68,8 +89,11 @@ export const fetchProductWithVendor = async (id) => {
     const res = await axios.get(`${API_URL}/products/${id}`);
     return res.data;
   } catch (err) {
-    console.error(err);
-    return null;
+    if (err.response) {
+      throw err.response.data;
+    } else {
+      throw err;
+    }
   }
 };
 
@@ -80,6 +104,26 @@ export const fetchProductWithVendorAndListings = async (id) => {
   } catch (err) {
     console.error(err);
     return null;
+  }
+};
+
+// update product
+export const productUpdate = async (id, productData) => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.put(`${API_URL}/products/${id}`, productData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    if (err.response) {
+      throw err.response.data;
+    } else {
+      throw err;
+    }
   }
 };
 
