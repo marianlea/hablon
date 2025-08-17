@@ -127,6 +127,25 @@ export const productUpdate = async (id, productData) => {
   }
 };
 
+// delete product
+export const productDelete = async (id) => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.delete(`${API_URL}/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    if (err.response) {
+      throw err.response.data;
+    } else {
+      throw err;
+    }
+  }
+};
+
 // users
 export const fetchAllUsers = async () => {
   try {

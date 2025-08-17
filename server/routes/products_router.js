@@ -140,4 +140,71 @@ router.put("/:id", ensureLoggedIn, async (req, res) => {
   }
 });
 
+// DELETE a product
+router.delete("/:id", ensureLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const vendorId = req.userData.userId;
+
+    // First check if product exists
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({
+        error: "Product not found",
+      });
+    }
+
+    // Check if vendor owns the product
+    if (product.vendor_id.toString() !== vendorId) {
+      return res.status(403).json({
+        error: "Access denied. You can only delete your own products.",
+      });
+    }
+
+    // Delete the product
+    const deletedProduct = await Product.findOneAndDelete({
+      _id: id,
+      vendor_id: vendorId,
+    });
+
+    if (!deletedProduct) {
+      return res.status(500).json({
+        error: "Failed to delete product",
+      });
+    }
+
+    // Remove product reference from vendor's listings
+    const updatedVendor = await Vendor.findByIdAndUpdate(
+      vendorId,
+      { $pull: { product_listings: id } },
+      { new: true }
+    );
+
+    if (!updatedVendor) {
+      // Log this error since we successfully deleted the product
+      // but failed to update the vendor
+      console.error("Product deleted but vendor update failed", {
+        productId: id,
+        vendorId: vendorId,
+      });
+    }
+    return res.status(200).json({
+      message: "Product deleted successfully",
+      deletedProductId: id,
+    });
+  } catch (err) {
+    console.error("Delete product error:", err);
+
+    if (err instanceof mongoose.Error.CastError) {
+      return res.status(400).json({
+        error: "Invalid product ID format",
+      });
+    }
+
+    return res.status(500).json({
+      error: "Server error while deleting product",
+    });
+  }
+});
+
 export default router;

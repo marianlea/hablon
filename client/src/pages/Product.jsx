@@ -1,5 +1,6 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useCurrentUser } from "../context/CurrentUserContext";
 import isTokenValid from "../helpers/isTokenValid";
 
@@ -15,7 +16,11 @@ import { RiInstagramFill } from "react-icons/ri";
 import MiniProductCard from "../components/MiniProductCard";
 
 // api
-import { fetchProductWithVendorAndListings } from "../utils/hablon_api";
+import {
+  fetchProductWithVendorAndListings,
+  productDelete,
+} from "../utils/hablon_api";
+import DeleteDialog from "../components/DeleteDialog";
 
 // data
 const fetchProductPageData = async (setProduct, id) => {
@@ -30,6 +35,8 @@ const fetchProductPageData = async (setProduct, id) => {
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const navigate = useNavigate();
   const { currentUser } = useCurrentUser();
 
   useEffect(() => {
@@ -52,6 +59,19 @@ const Product = () => {
   const vendor = product.vendor_id;
   const vendorListings = vendor.product_listings;
 
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
+      await productDelete(product._id);
+      toast.success("Product deleted successfully");
+      // Redirect to vendor's profile
+      navigate(`/vendors/${vendor._id}/products`);
+    } catch (err) {
+      setIsDeleting(false);
+      toast.error(err.error || "Failed to delete product");
+    }
+  };
+
   return (
     <section className="product-page-container">
       <article className="product-page-product-card">
@@ -71,12 +91,20 @@ const Product = () => {
             </div>
           </div>
         </header>
+
         <p>{product.availability}</p>
         <p className="product-description">{product.description}</p>
         {canEditProduct() && (
-          <Link to={`/products/${product._id}/edit`}>
-            <button>Edit Product</button>
-          </Link>
+          <div>
+            <Link to={`/products/${product._id}/edit`}>
+              <button>Edit Product</button>
+            </Link>
+            <DeleteDialog
+              handleDelete={handleDelete}
+              productName={product.name}
+              isDeleting={isDeleting}
+            />
+          </div>
         )}
 
         <section className="vendor-details-container">
