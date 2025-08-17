@@ -13,7 +13,7 @@ const LogoutButton = () => {
     localStorage.removeItem("token");
     setCurrentUser(null);
     navigate("/");
-    toast.success("successful logout");
+    toast.success("successful logged out");
   };
 
   return <button onClick={handleLogout}>Logout</button>;

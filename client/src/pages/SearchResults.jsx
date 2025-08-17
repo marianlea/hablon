@@ -14,7 +14,7 @@ const SearchResults = ({ products, vendors }) => {
         return (
           <div
             className="search-result-product-card-container"
-            key={product.id}
+            key={product._id}
           >
             <ProductCard product={product} vendors={vendors} />
           </div>

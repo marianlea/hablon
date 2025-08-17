@@ -140,7 +140,7 @@ const Product = () => {
             </div>
           </div>
         </section>
-        {vendor.product_listings.length > 1 && (
+        {vendor.product_listings.length > 1 ? (
           <footer className="more-products-container">
             <h4>{`More Products from ${vendor.nickname}'s Farm`}</h4>
             <section className="mini-product-cards">
@@ -148,6 +148,13 @@ const Product = () => {
                 return <MiniProductCard key={product._id} product={product} />;
               })}
             </section>
+          </footer>
+        ) : (
+          <footer className="more-products-container">
+            <h4>No other product listed.</h4>
+            <Link to="/products/new">
+              <span>Add product</span>
+            </Link>
           </footer>
         )}
       </article>

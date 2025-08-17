@@ -55,10 +55,9 @@ export const VendorSignUp = () => {
 
     try {
       const values = form.getState().values;
-      const vendor = await signupVendor(values);
-
+      await signupVendor(values);
       toast.success("Sign up successful!");
-      navigate(`/vendors/${vendor._id}/products`);
+      navigate(`/login`);
       return true;
     } catch (err) {
       if (err.error === "Email or username already taken") {

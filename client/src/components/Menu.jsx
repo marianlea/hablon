@@ -34,25 +34,55 @@ const Menu = () => {
       </header>
       <section className="links-container">
         <ul className="main-links-container">
-          {mainLinks.map((link, idx) => (
-            <li key={idx} onClick={() => setIsMenuVisible((prev) => !prev)}>
-              <Link to="/" className="menu-links">
-                {link.toUpperCase()}{" "}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ul className="vendor-links-container">
-          <h6>For Vendors</h6>
+          {currentUser && (
+            <Link
+              to={`/vendors/${currentUser._id}/products`}
+              onClick={() => setIsMenuVisible((prev) => !prev)}
+              className="menu-links"
+            >
+              <li>YOUR PROFILE</li>
+            </Link>
+          )}
           <Link
-            to="/vendors/signup"
+            to="/"
+            className="menu-links"
             onClick={() => setIsMenuVisible((prev) => !prev)}
           >
-            <li>Vendor Sign Up</li>
+            <li>HOME</li>
           </Link>
-          <Link to="/login" onClick={() => setIsMenuVisible((prev) => !prev)}>
-            <li>Vendor Log In</li>
+          <Link
+            to="/"
+            className="menu-links"
+            onClick={() => setIsMenuVisible((prev) => !prev)}
+          >
+            <li>ABOUT</li>
           </Link>
+          <Link
+            to="/"
+            className="menu-links"
+            onClick={() => setIsMenuVisible((prev) => !prev)}
+          >
+            <li>CONTACT</li>
+          </Link>
+        </ul>
+        <ul className="vendor-links-container">
+          {!currentUser && (
+            <>
+              <h6>For Vendors</h6>
+              <Link
+                to="/vendors/signup"
+                onClick={() => setIsMenuVisible((prev) => !prev)}
+              >
+                <li>Vendor Sign Up</li>
+              </Link>
+              <Link
+                to="/login"
+                onClick={() => setIsMenuVisible((prev) => !prev)}
+              >
+                <li>Vendor Log In</li>
+              </Link>
+            </>
+          )}
           {currentUser && (
             <li>
               <LogoutButton />

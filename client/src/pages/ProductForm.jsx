@@ -56,7 +56,7 @@ export const ProductForm = ({ mode = "create", initialData = null }) => {
       } else {
         const productCreated = await productCreate(productData);
         toast.success("Product created successfully!");
-        navigate(`/products/${productCreated._id}`);
+        navigate(`/products/${productCreated._id}/page`);
       }
       return true;
     } catch (err) {

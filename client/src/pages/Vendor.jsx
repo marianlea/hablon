@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 // icons
 import {
@@ -78,9 +78,17 @@ const Vendor = () => {
         </section>
 
         {vendorListings.length === 0 ? (
-          <h4>No listings yet</h4>
+          <>
+            <h4>No listings yet</h4>
+            <Link to="/products/new">
+              <span>Add product</span>
+            </Link>
+          </>
         ) : (
           <footer className="more-products-container">
+            <Link to="/products/new">
+              <span>Add product</span>
+            </Link>
             <h4>Our Products</h4>
             <div className="mini-product-cards">
               {vendorListings.map((product) => {
