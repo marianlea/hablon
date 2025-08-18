@@ -49,7 +49,7 @@ const fetchProducts = async (setProducts) => {
   }
 };
 
-function App() {
+export const App = () => {
   const [vendors, setVendors] = useState([]);
   const [products, setProducts] = useState([]);
   const { isMenuVisible, setIsMenuVisible } = useMenu();
@@ -112,6 +112,6 @@ function App() {
       </main>
     </>
   );
-}
+};
 
 export default App;
