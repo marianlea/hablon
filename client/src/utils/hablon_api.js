@@ -62,7 +62,6 @@ export const productCreate = async (productData) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(res.data);
 
     return res.data;
   } catch (err) {

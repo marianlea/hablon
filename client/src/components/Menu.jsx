@@ -13,7 +13,7 @@ import { LuInstagram } from "react-icons/lu";
 import hablonLogo from "../assets/images/hablon_shadow.png";
 import LogoutButton from "./Logout";
 
-const mainLinks = ["home", "about", "contact"];
+// const mainLinks = ["home", "about", "contact"];
 
 const Menu = () => {
   const { currentUser } = useCurrentUser();
@@ -34,7 +34,7 @@ const Menu = () => {
       </header>
       <section className="links-container">
         <ul className="main-links-container">
-          {currentUser && (
+          {currentUser && currentUser._id && (
             <Link
               to={`/vendors/${currentUser._id}/products`}
               onClick={() => setIsMenuVisible((prev) => !prev)}

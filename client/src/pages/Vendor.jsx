@@ -16,6 +16,9 @@ import MiniProductCard from "../components/MiniProductCard";
 import { fetchVendorWithProducts } from "../utils/hablon_api";
 import { useEffect, useState } from "react";
 
+// contexts
+import { useCurrentUser } from "../context/CurrentUserContext";
+
 // data
 const fetchVendorData = async (setVendor, id) => {
   try {
@@ -29,6 +32,7 @@ const fetchVendorData = async (setVendor, id) => {
 const Vendor = () => {
   const { id } = useParams();
   const [vendor, setVendor] = useState(null);
+  const { currentUser } = useCurrentUser();
 
   useEffect(() => {
     fetchVendorData(setVendor, id);
@@ -76,19 +80,22 @@ const Vendor = () => {
             </button>
           </div>
         </section>
-
         {vendorListings.length === 0 ? (
           <>
             <h4>No listings yet</h4>
-            <Link to="/products/new">
-              <span>Add product</span>
-            </Link>
+            {currentUser && currentUser._id === vendor._id && (
+              <Link to="/products/new">
+                <span>Add product</span>
+              </Link>
+            )}
           </>
         ) : (
           <footer className="more-products-container">
-            <Link to="/products/new">
-              <span>Add product</span>
-            </Link>
+            {currentUser && currentUser._id === vendor._id && (
+              <Link to="/products/new">
+                <span>Add product</span>
+              </Link>
+            )}
             <h4>Our Products</h4>
             <div className="mini-product-cards">
               {vendorListings.map((product) => {

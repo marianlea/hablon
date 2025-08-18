@@ -14,14 +14,14 @@ export const CurrentUserProvider = ({ children }) => {
       return;
     }
 
-    const validToken = isTokenValid(token);
+    const { valid, decoded, error } = isTokenValid(token);
 
-    if (!validToken) {
-      console.log("Invalid or expired token");
+    if (!valid) {
+      console.log("Invalid or expired token", error);
       setCurrentUser(null);
       localStorage.removeItem("token");
     } else {
-      setCurrentUser({ _id: validToken.decoded.id });
+      setCurrentUser({ _id: decoded.id });
     }
   }, []);
 

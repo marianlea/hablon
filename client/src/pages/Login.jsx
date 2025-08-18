@@ -26,9 +26,10 @@ export const Login = () => {
 
     try {
       const loginData = await login({ username, password });
+      // save token
       localStorage.setItem("token", loginData.token);
-      setCurrentUser(loginData.currentUser._id);
-      console.log("You are logged in");
+      // update current user context
+      setCurrentUser({ _id: loginData.currentUser._id });
       toast.success("Login successful!");
       navigate(`/`);
     } catch (err) {
