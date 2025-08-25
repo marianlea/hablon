@@ -6,6 +6,7 @@ import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 // context
 import { useSearch } from "../context/SearchContext";
+import FaveButton from "./FaveButton";
 
 const ProductCard = ({ product }) => {
   const { setSearchValue } = useSearch();
@@ -19,12 +20,7 @@ const ProductCard = ({ product }) => {
       <article className="product-card">
         <header className="image-container">
           <img className="product-image" src={product.img[0]}></img>
-          {/* <MdFavoriteBorder
-            size={40}
-            className="fave-button"
-            color="#ggg"
-            style={{ filter: "drop-shadow(2px 2px 2px rgba(0,0,0,0.5))" }}
-          /> */}
+          <FaveButton productId={product._id} />
           <div
             className="vendor-round-container"
             style={{

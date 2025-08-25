@@ -12,7 +12,7 @@ const MiniProductCard = ({ product }) => {
         </figure>
         <footer>
           <p>{product.name}</p>
-          <p className="product-price">{`Php${product.price}/kg`}</p>
+          <p className="product-price">{`Php${product.price}/${product.unit}`}</p>
         </footer>
       </article>
     </Link>

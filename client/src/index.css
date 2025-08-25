@@ -141,11 +141,25 @@
   object-fit: cover;
 }
 
-.fave-button {
+.heart-wrapper {
+  background-color: #fff;
+  width: 3rem;
+  height: 3rem;
   position: absolute;
   left: 0.75rem;
   top: 0.75rem;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.5rem;
+  border: 0;
+}
+
+.fave-button {
+  position: absolute;
   z-index: 1;
+  color: #f1c29c;
 }
 
 .vendor-round-container {
