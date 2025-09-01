@@ -14,24 +14,36 @@ Many of the vendors I want to empower rely primarily on mobile phones and often 
 
 My goal is to help these communities preserve traditional crafts, build sustainable livelihoods, and reach customers without relying on middlemen.
 
+## 💡 Motivation
+
+I built Hablon as my capstone full-stack project because I wanted to create something meaningful beyond just technical practice. Growing up in the Philippines, I saw how many small producers — broom makers, farmers, weavers — struggled to sell their products fairly, often relying on middlemen who take most of the profit.
+
+Hablon is my way of combining my passion for technology with a purpose-driven project: helping local producers showcase their work, reach customers directly, and preserve traditions in a digital age. It reflects my belief that tech can and should be used to empower communities.
+
 ## 🛠️ Features (In Progress)
 
-- 🪡 **Vendor profiles** — display your products, photos, contact info, and location
-- 🔍 **Product feed** — browse listings by category or tag
-- 💬 **No in-app payments** — buyers reach out directly to vendors
-- ⭐ **Favorites (buyer-side)** — signed-in users can save vendors they love
+**🪡 Vendor profiles** — showcase products, photos, contact info, and location
+**🔍 Product feed**— browse listings by category or tag
+**💬 Direct contact** — no in-app payments; buyers reach out directly to vendors
+**⭐ Favorites** — signed-in users can save products/vendors they love
+**✏️ Product management** — vendors can create and update products via a reusable form component with prefilled data for editing
 
 ## 🔧 Tech Stack
 
-- **Frontend**: ReactJS, TailwindCSS / Material UI
-- **Backend (in progress)**: Node.js + Express + MongoDB (MERN stack)
-- **Authentication**: Coming soon (JWT-based for both vendors and buyers)
-- **Hosting**: TBD
+**Frontend:** ReactJS (mobile-first, component-based design)
+**Backend:** Node.js + Express
+**Database:** MongoDB (Mongoose for schema modeling)
+**Authentication & Security:**
+JWT-based authentication
+Password hashing & salting with bcrypt
+**Hosting:** TBD
 
 ## 🔮 Future Features
 
-- ✅ **Mobile-first design** — optimize the app for users on smartphones and limited data plans
-- 🌱 **Low-bandwidth focus** — minimal dependencies, optimized image sizes, and efficient data fetching
+**📱 Refined mobile experience** — lightweight design with offline-friendly strategies
+**🌱 Low-bandwidth focus** — op timized images, efficient API calls, minimal dependencies
+**🔎 Search & filtering** — for products and vendors
+**📊 Vendor dashboards** — insights into products and engagement
 
 ## 🚀 Getting Started
 
@@ -49,8 +61,7 @@ Visit `http://localhost:3000` to explore the app.
 
 ## 🚧 Roadmap
 
-- Complete backend API for vendor and product management
-- Implement authentication and authorization
-- Add search and filtering capabilities for products and vendors
-- Build admin dashboard for vendor/content management
-- Deploy to production with performance optimizations for low bandwidth users
+- Expand backend API for vendor & product management
+- Improve user experience for favoriting products/vendors
+- Add loaders, redirects, and smoother navigation flows
+- Deploy to production with optimizations for low-bandwidth users
