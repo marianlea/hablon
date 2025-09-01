@@ -22,28 +22,28 @@ Hablon is my way of combining my passion for technology with a purpose-driven pr
 
 ## 🛠️ Features (In Progress)
 
-**🪡 Vendor profiles** — showcase products, photos, contact info, and location
-**🔍 Product feed**— browse listings by category or tag
-**💬 Direct contact** — no in-app payments; buyers reach out directly to vendors
-**⭐ Favorites** — signed-in users can save products/vendors they love
-**✏️ Product management** — vendors can create and update products via a reusable form component with prefilled data for editing
+- **🪡 Vendor profiles** — showcase products, photos, contact info, and location
+- **🔍 Product feed**— browse listings by category or tag
+- **💬 Direct contact** — no in-app payments; buyers reach out directly to vendors
+- **⭐ Favorites** — signed-in users can save products/vendors they love
+- **✏️ Product management** — vendors can create and update products via a reusable form component with prefilled data for editing
 
 ## 🔧 Tech Stack
 
-**Frontend:** ReactJS (mobile-first, component-based design)
-**Backend:** Node.js + Express
-**Database:** MongoDB (Mongoose for schema modeling)
-**Authentication & Security:**
-JWT-based authentication
-Password hashing & salting with bcrypt
-**Hosting:** TBD
+- **Frontend:** ReactJS (mobile-first, component-based design)
+- **Backend:** Node.js + Express
+- **Database:** MongoDB (Mongoose for schema modeling)
+- **Authentication & Security:**
+  JWT-based authentication
+  Password hashing & salting with bcrypt
+- **Hosting:** TBD
 
 ## 🔮 Future Features
 
-**📱 Refined mobile experience** — lightweight design with offline-friendly strategies
-**🌱 Low-bandwidth focus** — op timized images, efficient API calls, minimal dependencies
-**🔎 Search & filtering** — for products and vendors
-**📊 Vendor dashboards** — insights into products and engagement
+- **📱 Refined mobile experience** — lightweight design with offline-friendly strategies
+- **🌱 Low-bandwidth focus** — op timized images, efficient API calls, minimal dependencies
+- **🔎 Search & filtering** — for products and vendors
+- **📊 Vendor dashboards** — insights into products and engagement
 
 ## 🚀 Getting Started
 
