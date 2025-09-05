@@ -2,6 +2,9 @@ import express from "express";
 import Vendor from "../models/vendor.js";
 import bcrypt from "bcrypt";
 
+// middleware
+import ensureLoggedIn from "../middlewares/ensure_logged_in.js";
+
 const router = express.Router();
 
 // POST new vendor
@@ -68,6 +71,40 @@ router.post("/signup", async (req, res) => {
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Server error" });
+  }
+});
+
+// PATCH vendor favorite products
+router.patch("/favorites/products", ensureLoggedIn, async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const userId = req.user.id;
+
+    const user = await Vendor.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found." });
+
+    const alreadyFaved = user.favorite_products.some((fav) =>
+      fav.equals(productId)
+    );
+
+    if (alreadyFaved) {
+      user.favorite_products = user.favorite_products.filter(
+        (fav) => !fav.equals(productId)
+      );
+    } else {
+      user.favorite_products.push(productId);
+    }
+
+    await user.save();
+
+    res.json({
+      message: alreadyFaved
+        ? "Removed product from favorites"
+        : "Added product to favorites",
+      favorites: user.favorite_products,
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
   }
 });
 

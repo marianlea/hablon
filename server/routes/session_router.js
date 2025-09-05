@@ -10,23 +10,19 @@ const router = express.Router();
 
 // POST login
 router.post("/login", async (req, res) => {
-  console.log(req.body);
-
   try {
     const { username, password } = req.body;
 
     const existingUser = await Vendor.findOne({ username: username });
 
     if (!existingUser) {
-      return res
-        .status(401)
-        .json({ error: "Username is incorrect or does not exist." });
+      return res.status(401).json({ error: "Invalid username or password." });
     }
 
     const match = await bcrypt.compare(password, existingUser.password_digest);
 
     if (!match) {
-      return res.status(401).json({ error: "Password is incorrect." });
+      return res.status(401).json({ error: "Invalid username or password." });
     }
 
     const token = jwt.sign(
@@ -39,9 +35,11 @@ router.post("/login", async (req, res) => {
       message: "Login successful!",
       token: token,
       currentUser: {
-        _id: existingUser._id,
+        currentUser: existingUser,
       },
     });
+
+    console.log(existingUser);
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Server error" });

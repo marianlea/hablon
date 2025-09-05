@@ -29,7 +29,7 @@ export const Login = () => {
       // save token
       localStorage.setItem("token", loginData.token);
       // update current user context
-      setCurrentUser({ _id: loginData.currentUser._id });
+      setCurrentUser({ currentUser: loginData.currentUser });
       toast.success("Login successful!");
       navigate(`/`);
     } catch (err) {

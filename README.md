@@ -41,7 +41,7 @@ Hablon is my way of combining my passion for technology with a purpose-driven pr
 ## 🔮 Future Features
 
 - **📱 Refined mobile experience** — lightweight design with offline-friendly strategies
-- **🌱 Low-bandwidth focus** — op timized images, efficient API calls, minimal dependencies
+- **🌱 Low-bandwidth focus** — optimized images, efficient API calls, minimal dependencies
 - **🔎 Search & filtering** — for products and vendors
 - **📊 Vendor dashboards** — insights into products and engagement
 

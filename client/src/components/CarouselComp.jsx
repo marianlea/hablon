@@ -40,7 +40,7 @@ const CarouselComp = ({ filteredProducts, vendors }) => {
       <Carousel
         className="categories-carousel"
         responsive={responsive}
-        infinite={true}
+        infinite={false}
       >
         {filteredProducts.map((product) => (
           <ProductCard product={product} vendors={vendors} key={product._id} />
